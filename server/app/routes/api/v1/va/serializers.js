@@ -105,9 +105,16 @@ function serializeAmbassadorForAdmin(ambassador) {
   obj["giftcard_completed"] = ambassador.get("giftcard_completed")
   obj["signup_completed"] = ambassador.get("signup_completed")
   obj["payout_provider"] = ambassador.get("payout_provider")
-  obj["admin_bonus"] = ambassador.get("admin_bonus").toNumber() || 0
   obj["trust_factors"] = getTrustFactors(ambassador)
   obj["ekata_report"] = ambassador.get("ekata_report") || ""
+
+  let adminBonus = ambassador.get("admin_bonus")
+  if (adminBonus) {
+    adminBonus = adminBonus.toNumber()
+  } else {
+    adminBonus = 0
+  }
+  obj["admin_bonus"] = adminBonus
 
   //claimees
   let claimees = ambassador.get("claims")
